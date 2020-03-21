@@ -46,8 +46,9 @@ router.put('/:timeblock/:task', async (req, res) => {
 
 router.delete('/:timeblock/:task', async (req, res) => {
 	try {
-		const request = await Tasks.remove(req.params.timeblock)
-		res.status(200).json(request)
+		const removed = await Tasks.getById(req.params.task)
+		await Tasks.remove(req.params.task)
+		res.status(200).json(removed)
 	} catch (e) {
 		res.status(500).json({ error: e.message });
 	}

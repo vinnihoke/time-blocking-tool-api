@@ -5,11 +5,13 @@ const getByUser = id => {
 }
 
 const getById = id => {
-	return db('timeblocks').where({ id })
+	return db('timeblocks').where({ id }).first()
 }
 
 const insert = timeblock => {
-	return db('timeblocks').insert(timeblock, 'id')
+	return db('timeblocks').insert(timeblock, 'id').then(id => {
+		return getById(id[0])
+	})
 }
 
 const update = (id, changes) => {
