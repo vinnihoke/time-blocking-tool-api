@@ -1,3 +1,4 @@
+require('dotenv').config()
 const router = require('express').Router();
 const purecrypt = require('purecrypt');
 const generateToken = require('../api/middleware/token.js');
@@ -19,7 +20,7 @@ router.get('/oauth', async (req, res) => {
 		if (current) {
 			try {
 				const token = await generateToken(current);
-				res.redirect(`http://localhost:3000/auth/${token}`)
+				res.redirect(`${process.env.FE_URL}/auth/${token}`)
 			} catch (e) {
 				res.status(500).json({ line: "25", error: e.message });
 			}
@@ -27,7 +28,7 @@ router.get('/oauth', async (req, res) => {
 			try {
 				const newUser = await Auth.insert(user)
 				const token = await generateToken(newUser);
-				res.redirect(`http://localhost:3000/auth/${token}`)
+				res.redirect(`${process.env.FE_URL}/auth/${token}`)
 			} catch (e) {
 				res.status(500).json({ line: "34", error: e.message });
 			}
