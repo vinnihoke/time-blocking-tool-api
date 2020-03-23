@@ -3,6 +3,7 @@ const secrets = require('./secrets.js');
 
 const restricted = (req, res, next) => {
 	const token = req.headers.authorization;
+	console.log("Token from restricted middleware", token)
 	if (token) {
 		jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
 			if (err) {
@@ -10,6 +11,7 @@ const restricted = (req, res, next) => {
 				res.status(401).end()
 			} else {
 				req.decodedToken = decodedToken;
+				console.log("decodedToken", decodedToken)
 				next();
 			}
 		})

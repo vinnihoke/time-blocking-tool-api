@@ -34,6 +34,7 @@ router.get('/oauth', async (req, res) => {
 			}
 		}
 	} catch (e) {
+		console.log("Check dev server")
 		res.status(500).json({ line: "38", error: e.message });
 	}
 })

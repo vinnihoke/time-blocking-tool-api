@@ -5,7 +5,7 @@ const get = () => {
 }
 
 const getById = id => {
-	return db('users').where({ id })
+	return db('users').where({ id }).first()
 }
 
 const getByEmail = email => {
