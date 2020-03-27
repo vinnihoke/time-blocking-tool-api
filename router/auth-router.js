@@ -12,7 +12,7 @@ router.get('/oauth', async (req, res) => {
 		email: req.session.grant.response.id_token.payload.email,
 		provider: req.session.grant.provider,
 		access_token: purecrypt.encrypt(req.session.grant.response.access_token),
-		refresh_token: purecrypt.encrypt(req.session.grant.response.refresh_token),
+		refresh_token: purecrypt.encrypt(req.session.grant.response.refresh_token)
 	}
 
 	try {
@@ -34,8 +34,7 @@ router.get('/oauth', async (req, res) => {
 			}
 		}
 	} catch (e) {
-		console.log("Check dev server")
-		res.status(500).json({ line: "38", error: e.message });
+		res.status(500).json({ line: "38", message: "Check Postgres", error: e });
 	}
 })
 

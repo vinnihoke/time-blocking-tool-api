@@ -36,10 +36,12 @@ router.post('/:id', async (req, res) => {
 
 router.put('/:id/:timeblock', async (req, res) => {
 	try {
-		const request = await Timeblock.update(req.params.timeblock, req.body)
+		await Timeblock.update(req.params.timeblock, req.body)
+		const request = await Timeblock.getById(req.params.timeblock)
 		res.status(200).json(request)
+		console.log(request)
 	} catch (e) {
-		res.status(500).json({ error: e.message });
+		res.status(500).json({ error: e });
 	}
 })
 
